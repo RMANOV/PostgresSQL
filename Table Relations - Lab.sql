@@ -82,3 +82,19 @@ ON r.leader_id = c.id;
 DROP TABLE IF EXISTS mountains CASCADE;
 
 --Language: SQL
+
+-- Find value that is under the maximal value from the table
+
+SELECT MAX(value) FROM table_name WHERE value < (SELECT MAX(value) FROM table_name); -- uses subquery to find the max value and then compares it to the other values
+
+-- same task but use only one query
+
+SELECT value FROM table_name WHERE value < (SELECT MAX(value) FROM table_name) ORDER BY value DESC LIMIT 1; -- uses subquery to find the max value and then compares it to the other values
+
+-- same task but use only one query and no subquery
+
+SELECT value FROM table_name ORDER BY value DESC --jump first to the max value and then go to the next one 
+OFFSET 1 -- jump to the next one
+LIMIT 1; -- get the next one
+
+--Language: SQL
